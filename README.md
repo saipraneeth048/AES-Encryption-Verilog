@@ -43,7 +43,7 @@ verified against NIST FIPS-197 test vectors, and implemented on Xilinx Artix-7 F
 | `done` | 1 | Output | Encryption complete flag |
 
 ### Schematic
-![Schematic](docs/schematic.png)
+![Schematic](schematic.png)
 
 ---
 
@@ -58,7 +58,7 @@ All three AES modes verified against **official NIST FIPS-197 test vectors**:
 | AES-256 | `00112233445566778899aabbccddeeff` | `00010203...1e1f` | `8ea2b7ca516745bfeafc49904b496089` | ✅ PASS |
 
 ### Simulation Waveform
-![Waveform](docs/waveform.png)
+![Waveform](waveform.png)
 
 ---
 
