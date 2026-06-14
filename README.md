@@ -175,7 +175,7 @@ AES-Encryption-Verilog/
 **Sai Praneeth Polepalle**  
 B.Tech, Electronics & Communication Engineering  
 Sree Rama Engineering College (JNTUA), 2026  
-CGPA: 8.1 / 10
+CGPA: 7.8 / 10
 
 - 📧 psaipraneeth048@gmail.com  
 - 🔗 [LinkedIn](https://www.linkedin.com/in/sai-praneeth-polepalle)  
