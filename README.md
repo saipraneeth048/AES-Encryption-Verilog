@@ -95,10 +95,10 @@ All three AES modes verified against **official NIST FIPS-197 test vectors**:
 - Logic: 48% | Signals: 45% | Clocks: 7% | I/O: <1%
 
 ### Implementation Snapshots
-![Project Summary](docs/vivado_project_summary.png)
-![Timing Report](docs/timing_report.png)
-![Power Report](docs/power_report.png)
-![Device View](docs/device_view.png)
+![Project Summary](vivado_project_summary.png)
+![Timing Report](timing_report.png)
+![Power Report](power_report.png)
+![Device View](device_view.png)
 
 ---
 
@@ -145,7 +145,7 @@ AES-Encryption-Verilog/
 │ └── sbox.v
 ├── tb/
 │ └── tb_aes_multimode.v
-├── docs/
+├── 
 │ ├── schematic.png
 │ ├── waveform.png
 │ ├── vivado_project_summary.png
