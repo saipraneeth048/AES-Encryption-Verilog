@@ -1,4 +1,3 @@
-# saipraneeth048-AES-Encryption-Verilog
 # 🔐 AES-128 / 192 / 256 Encryption Core in Verilog HDL
 
 A fully synthesizable, FSM-driven AES (Advanced Encryption Standard) encryption core 
@@ -95,9 +94,17 @@ All three AES modes verified against **official NIST FIPS-197 test vectors**:
 - Logic: 48% | Signals: 45% | Clocks: 7% | I/O: <1%
 
 ### Implementation Snapshots
+
+**Vivado Project Summary**
 ![Project Summary](vivado_project_summary.png)
+
+**Timing Report**
 ![Timing Report](timing_report.png)
+
+**Power Report**
 ![Power Report](power_report.png)
+
+**Device View (Post Place & Route)**
 ![Device View](device_view.png)
 
 ---
@@ -124,47 +131,56 @@ All three AES modes verified against **official NIST FIPS-197 test vectors**:
 ---
 
 ## 🚀 How to Run
-1. Clone the repository:
-   git clone https://github.com/saipraneeth048/AES-Encryption-Verilog.git
-2. Open **Xilinx Vivado 2023.1**
-3. Create new project → target FPGA: `xc7a35tcpg236-1`
-4. Add source files from `src/` and `tb/`
-5. Set `tb_aes_multimode.v` as simulation top
-6. Run Behavioral Simulation → observe waveforms
-7. Run Synthesis → Implementation → Generate Bitstream
 
+```bash
+git clone https://github.com/saipraneeth048/AES-Encryption-Verilog.git
+```
+
+1. Open **Xilinx Vivado 2023.1**
+2. Create new project → target FPGA: `xc7a35tcpg236-1`
+3. Add source files from `src/` and testbench from `tb/`
+4. Set `tb_aes_multimode.v` as simulation top
+5. Run Behavioral Simulation → observe waveforms
+6. Run Synthesis → Implementation → Generate Bitstream
+
+---
 
 ## 📂 Repository Structure
+
+```
 AES-Encryption-Verilog/
 ├── README.md
 ├── src/
-│ ├── top_module.v
-│ ├── aes_core.v
-│ ├── aes_encrypt_top.v
-│ ├── key_expansion.v
-│ └── sbox.v
+│   ├── top_module.v
+│   ├── aes_core.v
+│   ├── aes_encrypt_top.v
+│   ├── key_expansion.v
+│   └── sbox.v
 ├── tb/
-│ └── tb_aes_multimode.v
-├── 
-│ ├── schematic.png
-│ ├── waveform.png
-│ ├── vivado_project_summary.png
-│ ├── timing_report.png
-│ ├── power_report.png
-│ └── device_view.png
-└── constraints/
-└── constraints.xdc
+│   └── tb_aes_multimode.v
+├── constraints/
+│   └── constraints.xdc
+├── schematic.png
+├── waveform.png
+├── vivado_project_summary.png
+├── timing_report.png
+├── power_report.png
+└── device_view.png
+```
+
+---
 
 ## 👤 Author
+
 **Sai Praneeth Polepalle**  
 B.Tech, Electronics & Communication Engineering  
 Sree Rama Engineering College (JNTUA), 2026  
 CGPA: 8.1 / 10
 
-📧 psaipraneeth048@gmail.com  
-🔗 [LinkedIn](https://www.linkedin.com/in/sai-praneeth-polepalle)  
-💻 [GitHub](https://github.com/saipraneeth048)  
-📱 +91-8247249581
+- 📧 psaipraneeth048@gmail.com  
+- 🔗 [LinkedIn](https://www.linkedin.com/in/sai-praneeth-polepalle)  
+- 💻 [GitHub](https://github.com/saipraneeth048)  
+- 📱 +91-8247249581
 
 ---
 
