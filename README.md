@@ -1,6 +1,6 @@
-# 🔐 AES-128 / 192 / 256 Encryption Core in Verilog HDL
+# 🔐 AES-128 / 192 / 256 Encryption & Decryption Core in Verilog HDL
 
-A fully synthesizable, FSM-driven AES (Advanced Encryption Standard) encryption core 
+A fully synthesizable, FSM-driven AES (Advanced Encryption Standard) **encryption and decryption** core 
 supporting all three key sizes — 128-bit, 192-bit, and 256-bit — designed in Verilog HDL, 
 verified against NIST FIPS-197 test vectors, and implemented on Xilinx Artix-7 FPGA.
 
@@ -8,11 +8,36 @@ verified against NIST FIPS-197 test vectors, and implemented on Xilinx Artix-7 F
 
 ## 🎯 Project Highlights
 - ✅ Multi-mode AES core (128 / 192 / 256-bit keys) selectable via `mode[1:0]`
+- ✅ Full AES algorithm — both **encryption and decryption** datapaths
 - ✅ FSM-driven top-level controller with `start`, `done`, `reset` handshake
+- ✅ All 4 transformations as modular blocks (SubBytes, ShiftRows, MixColumns, AddRoundKey)
+- ✅ Inverse transformations for complete decryption support
 - ✅ **3/3 NIST FIPS-197 test vectors PASSED** for all key sizes
 - ✅ **Zero DRC violations | Zero failing timing endpoints**
 - ✅ Met setup AND hold timing (+3.805 ns WNS, +0.260 ns WHS)
 - ✅ Low resource utilization: 5% LUTs, 1% FFs on Artix-7
+
+---
+
+## 🔁 Encryption AND Decryption Support
+
+This project implements the **complete AES algorithm** — both encryption and decryption datapaths as separate modular units:
+
+### Encryption Path (`aes_encrypt_top.v`)
+- SubBytes (`sub_bytes.v`)
+- ShiftRows (`shift_rows.v`)
+- MixColumns (`mix_columns.v`)
+- AddRoundKey (integrated)
+
+### Decryption Path (`aes_decrypt_top.v`)
+- Inverse SubBytes (`InvSubs.v`)
+- Inverse ShiftRows (`InvShiftrows.v`)
+- Inverse MixColumns (`InvMixColumns.v`)
+- AddRoundKey (integrated)
+
+### Shared Modules
+- Key Expansion (`key_expansions.v`) — generates round keys for all 3 modes
+- S-Box (`sbox.v`) — lookup table for SubBytes
 
 ---
 
@@ -34,12 +59,12 @@ verified against NIST FIPS-197 test vectors, and implemented on Xilinx Artix-7 F
 |--------|-------|-----------|-------------|
 | `clk` | 1 | Input | System clock |
 | `rst` | 1 | Input | Active-high reset |
-| `start` | 1 | Input | Initiates encryption |
+| `start` | 1 | Input | Initiates operation |
 | `mode[1:0]` | 2 | Input | 00=AES-128, 01=AES-192, 10=AES-256 |
-| `key_in[255:0]` | 256 | Input | Encryption key |
+| `key_in[255:0]` | 256 | Input | Encryption/decryption key |
 | `plaintext[127:0]` | 128 | Input | Input data block |
-| `ciphertext[127:0]` | 128 | Output | Encrypted output |
-| `done` | 1 | Output | Encryption complete flag |
+| `ciphertext[127:0]` | 128 | Output | Processed output |
+| `done` | 1 | Output | Operation complete flag |
 
 ### Schematic
 ![Schematic](schematic.png)
@@ -115,7 +140,7 @@ All three AES modes verified against **official NIST FIPS-197 test vectors**:
 - 🟢 **No Inferred Latches**
 - 🟢 **Clean RTL Coding Practices** (proper sensitivity lists, complete assignments)
 - 🟢 **All 524 Timing Endpoints Pass Setup & Hold**
-- 🟢 **No Hold Violations** (often missed by freshers — WHS = +0.260 ns)
+- 🟢 **No Hold Violations** (WHS = +0.260 ns)
 
 ---
 
@@ -139,9 +164,10 @@ git clone https://github.com/saipraneeth048/AES-Encryption-Verilog.git
 1. Open **Xilinx Vivado 2023.1**
 2. Create new project → target FPGA: `xc7a35tcpg236-1`
 3. Add source files from `src/` and testbench from `tb/`
-4. Set `tb_aes_multimode.v` as simulation top
-5. Run Behavioral Simulation → observe waveforms
-6. Run Synthesis → Implementation → Generate Bitstream
+4. Add constraints from `constraints/`
+5. Set `tb_aes_multimode.v` as simulation top
+6. Run Behavioral Simulation → observe waveforms
+7. Run Synthesis → Implementation → Generate Bitstream
 
 ---
 
@@ -151,15 +177,22 @@ git clone https://github.com/saipraneeth048/AES-Encryption-Verilog.git
 AES-Encryption-Verilog/
 ├── README.md
 ├── src/
-│   ├── top_module.v
-│   ├── aes_core.v
-│   ├── aes_encrypt_top.v
-│   ├── key_expansion.v
-│   └── sbox.v
+│   ├── top_module.v              # Top-level wrapper
+│   ├── impl_top.v                # Implementation top module
+│   ├── aes_encrypt_top.v         # Encryption datapath top
+│   ├── aes_decrypt_top.v         # Decryption datapath top
+│   ├── key_expansions.v          # Round key generation (128/192/256)
+│   ├── sbox.v                    # Substitution box
+│   ├── sub_bytes.v               # SubBytes transformation
+│   ├── shift_rows.v              # ShiftRows transformation
+│   ├── mix_columns.v             # MixColumns transformation
+│   ├── InvSubs.v                 # Inverse SubBytes
+│   ├── InvShiftrows.v            # Inverse ShiftRows
+│   └── InvMixColumns.v           # Inverse MixColumns
 ├── tb/
-│   └── tb_aes_multimode.v
+│   └── tb_aes_multimode.v        # Multi-mode testbench (NIST vectors)
 ├── constraints/
-│   └── constraints.xdc
+│   └── constraints.xdc           # Pin & timing constraints
 ├── schematic.png
 ├── waveform.png
 ├── vivado_project_summary.png
